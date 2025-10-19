@@ -4,7 +4,12 @@ import os
 from threading import Thread
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-TOKEN = os.environ.get('BOT_TOKEN', 'YOUR_BOT_TOKEN_HERE')
+# Bot Token from environment variable
+TOKEN = os.environ.get('BOT_TOKEN')
+if not TOKEN:
+    print("❌ Error: BOT_TOKEN not found in environment variables!")
+    exit(1)
+
 API_URL = f"https://api.telegram.org/bot{TOKEN}"
 
 class HealthCheckHandler(BaseHTTPRequestHandler):
